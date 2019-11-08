@@ -1,0 +1,57 @@
+{
+  "name": "imagemin-compress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "imagemin-compress": "./bin/command"
+  },
+  "scripts": {
+    "test": "node ./bin/command -f ./test -d ./build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/front-library/imagemin-compress.git"
+  },
+  "bugs": {
+    "url": "https://github.com/front-library/imagemin-compress/issues"
+  },
+  "homepage": "https://github.com/front-library/imagemin-compress#readme",
+  "keywords": [
+    "imagemin",
+    "compress",
+    "image",
+    "jpeg",
+    "jpg",
+    "png",
+    "svg",
+    "gif"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "manpacker"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": {
+    "name": "winterfete"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^4.0.0",
+    "glob": "^7.1.6",
+    "imagemin": "^7.0.0",
+    "imagemin-gifsicle": "^6.0.1",
+    "imagemin-jpegtran": "^6.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "imagemin-svgo": "^7.0.0",
+    "ora": "^4.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-manpacker": "^1.5.1"
+  }
+}

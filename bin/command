@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+const commander = require('commander')
+const ora = require('ora')
+const chalk = require('chalk')
+const path = require('path')
+const { generator, status } = require('../lib/generator')
+const { version } = require('../package.json')
+
+commander.version(version)
+  .option(
+    '-f, --files [catalog name: string]',
+    'The images root catalog (current project) name, example: "./image".'
+  )
+  .option(
+    '-d, --dest [output catalog: string]',
+    'Directory name of output name'
+  )
+  .option(
+    '-c, --config [file: string]',
+    'The root (current project) settings config file.',
+    './imagemin.config.js'
+  )
+  .action(async options => {
+    let config
+    let spinner
+    let result
+
+    try {
+      config = require(path.resolve(options.config))
+    } catch (error) {
+      // TODO
+    }
+
+    config = {
+      ...config || {},
+      ...(options.files ? { files: options.files } : {}),
+      ...(options.dest ? { dest: options.dest } : {}),
+      verbose: false
+    }
+
+    spinner = ora(`Compress ${config.files} images……`)
+    spinner.start()
+    result = await generator(config)
+    spinner.stop()
+    if (result) {
+      result.map(value => status(value))
+    }
+
+    if (!options.files) {
+      console.log(chalk.yellow('Please enter the picture directory that needs to be compressed.'))
+      return false
+    }
+
+    if (result) {
+      console.log(chalk.green(`Compress images success, output: ${options.dest || options.files}`))
+    } else {
+      console.log(chalk.yellow(`${options.files}: Dir is not image files.`))
+    }
+  })
+  .parse(process.argv)

@@ -1,0 +1,13 @@
+.DS_Store
+.gitignore
+.vscode
+.travis.yml
+.babelrc
+.babelrc.js
+.eslintrc
+.eslintrc.js
+.npmignore
+iconfont.config.js
+node_modules
+test
+package-lock.json
